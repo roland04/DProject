@@ -29,7 +29,7 @@
       <table class="table table-striped">
         {% for characterskill in character.characterskill_set.all %}
         <tr>
-          <td>{{ characterskill.skill.name }}</td>
+          <td>{{ characterskill.skill.name }} ({{ characterskill.skill.attribute.name }})</td>
           <td>{{ characterskill.value }}</td>
         </tr>
         {% endfor %}
