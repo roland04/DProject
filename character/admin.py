@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Character, Attribute, Skill, CharacterAttribute, CharacterSkill
+from .models import Character, Attribute, Skill, CharacterAttribute, CharacterSkill, ShipModel, Ship
 
 class CharacterAttributeInline(admin.TabularInline):
     model = CharacterAttribute
@@ -17,3 +17,5 @@ class CharacterAdmin(admin.ModelAdmin):
 admin.site.register(Skill)
 admin.site.register(Attribute)
 admin.site.register(Character, CharacterAdmin)
+admin.site.register(ShipModel)
+admin.site.register(Ship)

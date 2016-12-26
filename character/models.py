@@ -34,7 +34,7 @@ class CharacterSkill(models.Model):
 
     def __str__(self):
         return "%s(%s)" % (self.character.name, self.skill.name)
-        
+
 class CharacterAttribute(models.Model):
     character = models.ForeignKey(Character)
     attribute = models.ForeignKey(Attribute)
@@ -42,3 +42,16 @@ class CharacterAttribute(models.Model):
 
     def __str__(self):
         return "%s(%s)" % (self.character.name, self.attribute.name)
+
+class ShipModel(models.Model):
+    name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
+
+class Ship(models.Model):
+    name = models.CharField(max_length=20)
+    shipmodel = models.ForeignKey(ShipModel)
+
+    def __str__(self):
+        return self.name

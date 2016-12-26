@@ -1,8 +1,16 @@
 from django.db import models
 
+class Star(models.Model):
+    name = models.CharField(max_length=20)
+    description = models.TextField(max_length=200, default=" ")
+
+    def __str__(self):
+        return self.name
+
 class Planet(models.Model):
     name = models.CharField(max_length=20)
     description = models.TextField(max_length=200, default=" ")
+    star = models.ForeignKey(Star, on_delete=models.CASCADE)
 
     TINY = 'TY'
     SMALL = 'SM'
@@ -24,6 +32,11 @@ class Planet(models.Model):
 
     def __str__(self):
         return self.name
+
+class Moon(models.Model):
+    name = models.CharField(max_length=20)
+    description = models.TextField(max_length=200, default=" ")
+    planet = models.ForeignKey(Planet, on_delete=models.CASCADE)
 
 class LocationType(models.Model):
     name = models.CharField(max_length=20)
