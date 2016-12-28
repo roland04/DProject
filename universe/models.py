@@ -1,8 +1,16 @@
 from django.db import models
 
+class Star(models.Model):
+    name = models.CharField(max_length=20)
+    description = models.TextField(max_length=200, default=" ")
+
+    def __str__(self):
+        return self.name
+
 class Planet(models.Model):
     name = models.CharField(max_length=20)
-    description = models.TextField(max_length=200)
+    description = models.TextField(max_length=200, default=" ")
+    star = models.ForeignKey(Star, on_delete=models.CASCADE)
 
     TINY = 'TY'
     SMALL = 'SM'
@@ -25,40 +33,43 @@ class Planet(models.Model):
     def __str__(self):
         return self.name
 
-class Location(models.Model):
+class Moon(models.Model):
     name = models.CharField(max_length=20)
-    description = models.TextField(max_length=200)
+    description = models.TextField(max_length=200, default=" ")
     planet = models.ForeignKey(Planet, on_delete=models.CASCADE)
 
-    HANGAR = 'HA'
-    CANTINA = 'CA'
-    MARKET = 'MA'
-    QUEST = 'QU'
-    LOCATION_TYPE_CHOICES = (
-        (HANGAR, 'Hangar'),
-        (CANTINA, 'Cantina'),
-        (MARKET, 'Market'),
-        (QUEST, 'Quest'),
-    )
-    locationtype = models.CharField(
-        max_length=20,
-        choices=LOCATION_TYPE_CHOICES,
-    )
+class LocationType(models.Model):
+    name = models.CharField(max_length=20)
+    description = models.TextField(max_length=200, default=" ")
+
+class Location(models.Model):
+    name = models.CharField(max_length=20)
+    description = models.TextField(max_length=200, default=" ")
+    planet = models.ForeignKey(Planet, on_delete=models.CASCADE)
+    locationtype = models.ForeignKey(LocationType)
 
     def __str__(self):
         return self.name
 
 class Resource(models.Model):
     name = models.CharField(max_length=20)
-    description = models.TextField(max_length=200)
+    description = models.TextField(max_length=200, default=" ")
 
     def __str__(self):
         return self.name
 
 class Item(models.Model):
     name = models.CharField(max_length=20)
-    description = models.TextField(max_length=200)
-    resources = models.ManyToManyField(Resource)
+    description = models.TextField(max_length=200, default=" ")
+    resources = models.ManyToManyField(Resource, through='ItemResource')
 
     def __str__(self):
         return self.name
+
+class ItemResource(models.Model):
+    item = models.ForeignKey(Item)
+    resource = models.ForeignKey(Resource)
+    quantity = models.IntegerField(default=1)
+
+    def __str__(self):
+        return "%s(%s)" % (self.item.name, self.resource.name)
