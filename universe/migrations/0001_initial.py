@@ -43,6 +43,14 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+            name='Moon',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=20)),
+                ('description', models.TextField(default=b' ', max_length=200)),
+            ],
+        ),
+        migrations.CreateModel(
             name='Planet',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -58,6 +66,24 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=20)),
                 ('description', models.TextField(default=b' ', max_length=200)),
             ],
+        ),
+        migrations.CreateModel(
+            name='Star',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=20)),
+                ('description', models.TextField(default=b' ', max_length=200)),
+            ],
+        ),
+        migrations.AddField(
+            model_name='planet',
+            name='star',
+            field=models.ForeignKey(to='universe.Star'),
+        ),
+        migrations.AddField(
+            model_name='moon',
+            name='planet',
+            field=models.ForeignKey(to='universe.Planet'),
         ),
         migrations.AddField(
             model_name='location',
