@@ -7,9 +7,17 @@ class Star(models.Model):
     def __str__(self):
         return self.name
 
+class Faction(models.Model):
+    name = models.CharField(max_length=20)
+    description = models.TextField(max_length=200, default=" ")
+
+    def __str__(self):
+        return self.name
+
 class Planet(models.Model):
     name = models.CharField(max_length=20)
     description = models.TextField(max_length=200, default=" ")
+    faction = models.ForeignKey(Faction, on_delete=models.CASCADE)
     star = models.ForeignKey(Star, on_delete=models.CASCADE)
 
     TINY = 'TY'

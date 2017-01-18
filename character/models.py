@@ -22,7 +22,7 @@ class Character(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     max_hitpoints = models.IntegerField(default=100)
     current_hitpoints = models.IntegerField(default=0)
-    reputation = models.IntegerField(default=0)
+    fame = models.IntegerField(default=0)
     currentposition = models.ForeignKey(Planet, on_delete=models.CASCADE)
     attributes = models.ManyToManyField(Attribute, through='CharacterAttribute')
     skills = models.ManyToManyField(Skill, through='CharacterSkill')
