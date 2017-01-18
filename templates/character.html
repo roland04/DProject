@@ -6,19 +6,23 @@
 <h2>{{ character.name}} <small>#{{ character.user.username}}</small></h2>
 <ul>
   <li>Location: {{ character.currentposition}}</li>
+  <li>Reputation: {{ character.reputation }}</li>
 </ul>
 </div>
 <div class="container">
   <div class="col-md-4">
    <div class="panel panel-default">
      <div class="panel-heading"><strong>Status</strong></div>
-     <p>Hitpoints</p>
-     <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="80"
-      aria-valuemin="0" aria-valuemax="100" style="width:{{ character.current_hitpoints }}%">
-        <span class="sr-only">70% Complete</span>
+     <div class="panel-body">
+       <p>Hitpoints</p>
+       <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="80"
+        aria-valuemin="0" aria-valuemax="100" style="width:{{ hitpointspercent }}%">
+          {{ character.current_hitpoints }}/{{ character.max_hitpoints }}
+          <span class="sr-only">{{ hitpointspercent }}% Complete</span>
+        </div>
       </div>
-</div>
+    </div>
    </div>
   </div>
   <div class="col-md-4">
@@ -49,6 +53,7 @@
     <div class="col-md-4">
       <div class="panel panel-default">
         <div class="panel-heading"><strong>Ship</strong></div>
+        <div class="panel-body"></div>
     </div>
   </div>
 </div>
